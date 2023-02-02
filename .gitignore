@@ -52,4 +52,5 @@ app.*.map.json
 /windows
 .metadata
 .lock
+pubspec.lock
 analysis_options.yaml
