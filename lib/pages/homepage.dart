@@ -1,12 +1,14 @@
-import 'package:allerhand_test/allerhand_icons.dart';
-import 'package:allerhand_test/custom_button.dart';
-import 'package:allerhand_test/custom_dialog.dart';
-import 'package:allerhand_test/onboarding_screens.dart';
-import 'package:allerhand_test/styles.dart';
+import 'package:allerhand_test/utils/allerhand_icons.dart';
+import 'package:allerhand_test/utils/locator.dart';
+import 'package:allerhand_test/utils/my_router_delegate.dart';
+import 'package:allerhand_test/widgets/custom_button.dart';
+import 'package:allerhand_test/widgets/custom_dialog.dart';
+import 'package:allerhand_test/pages/onboarding_screens.dart';
+import 'package:allerhand_test/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/onboarding.dart';
+import '../bloc/onboarding.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -74,11 +76,11 @@ class HomePage extends StatelessWidget {
           // кнопка "О нас"
           CustomButton(
             name: 'О нас',
-            icon: Allerhand.info,
+            icon: AllerhandIcons.info,
             onPressed: () => _onInfoPressed(context),
           ),
-          ConstrainedBox(
-            constraints: BoxConstraints.tight(const Size.fromWidth(50)),
+          SizedBox(
+            width: 50,
           ),
           // кнопка "Карта"
           CustomButton(
@@ -88,12 +90,12 @@ class HomePage extends StatelessWidget {
             onPressed: __onMapPressed,
             filled: true,
           ),
-          ConstrainedBox(
-            constraints: BoxConstraints.tight(const Size.fromWidth(40)),
+          SizedBox(
+            width: 40,
           ),
           CustomButton(
             name: 'Инструкция',
-            icon: Allerhand.questionBubble,
+            icon: AllerhandIcons.question_bubble,
             onPressed: () => _onOnboardingPressed(context),
             padding: const EdgeInsets.symmetric(horizontal: 52, vertical: 36),
           ),
@@ -107,7 +109,11 @@ class HomePage extends StatelessWidget {
     showCupertinoModalPopup(context: context, builder: _modalBuilder);
   }
 
-  __onMapPressed() {}
+  __onMapPressed() {
+    locator
+        .get<MyRouterDelegate>()
+        .pushPage(name: '/map', type: PageType.material);
+  }
 
   Widget _modalBuilder(BuildContext context) {
     return Center(

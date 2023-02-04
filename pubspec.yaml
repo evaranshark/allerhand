@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^4.0.1
   flutter_bloc: ^8.1.1
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
@@ -66,10 +67,14 @@ flutter:
       - assets/title_black 1.png
       - assets/main_left.png
       - assets/main_right.png
-      - assets/bubble.svg
+      - assets/arrow_left.png
+      - assets/map_1.png
+      - assets/map_2.png
+      - assets/map_0.png
+      - assets/photo.png
 
   fonts:
-    - family:  Allerhand
+    - family:  AllerhandIcons
       fonts:
-        - asset: assets/fonts/Allerhand.ttf
+        - asset: assets/fonts/AllerhandIcons.ttf
 

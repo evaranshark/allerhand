@@ -1,6 +1,9 @@
-import 'package:allerhand_test/homepage.dart';
+import 'package:allerhand_test/pages/homepage.dart';
+import 'package:allerhand_test/pages/map_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../pages/test_page.dart';
 
 class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -29,25 +32,37 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
   @override
   GlobalKey<NavigatorState>? get navigatorKey => _navigatorKey;
 
-  Page _createPage(RouteSettings settings) {
+  Page _createPage(RouteSettings settings, {PageType? type}) {
     Widget child;
     switch (settings.name) {
       case '/':
         child = const HomePage();
         break;
+      case '/map':
+        child = MapPage();
+        break;
       default:
         child = const HomePage();
         break;
     }
-    return CupertinoPage(
-      name: settings.name,
-      arguments: settings.arguments,
-      child: child,
-    );
+    if (type == PageType.material) {
+      return MaterialPage(
+        name: settings.name,
+        arguments: settings.arguments,
+        child: child,
+      );
+    } else {
+      return CupertinoPage(
+        name: settings.name,
+        arguments: settings.arguments,
+        child: child,
+      );
+    }
   }
 
-  void pushPage({required String name, dynamic arguments}) {
-    _pages.add(_createPage(RouteSettings(name: name, arguments: arguments)));
+  void pushPage({required String name, dynamic arguments, PageType? type}) {
+    _pages.add(_createPage(RouteSettings(name: name, arguments: arguments),
+        type: type));
     notifyListeners();
   }
 
@@ -69,3 +84,5 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
   @override
   List<Page> get currentConfiguration => List.of(_pages);
 }
+
+enum PageType { cupertino, material }

@@ -15,9 +15,16 @@ class CustomDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    var size = MediaQuery.of(context).size;
+    return Container(
       width: width,
       height: height,
+      constraints: BoxConstraints(
+        minWidth: size.width / 4,
+        minHeight: size.height / 3,
+        maxWidth: size.width / 2,
+        maxHeight: size.height / 2,
+      ),
       child: CupertinoPopupSurface(
         child: Padding(
           padding: padding ??

@@ -13,4 +13,5 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit(super.initialState);
 
   void setIndex(int index) => emit(state.copyWith(index: index));
+  void resetIndex() => emit(state.copyWith(index: 0));
 }

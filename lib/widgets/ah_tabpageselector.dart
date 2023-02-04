@@ -2,34 +2,32 @@ import 'package:flutter/material.dart';
 
 /// Uses [CustomTabPageSelectorIndicator] to display a row of small circular
 /// indicators, one per tab.
-///
-/// {@youtube 560 315 https://www.youtube.com/watch?v=Q628ue9Cq7U}
-///
-/// The selected tab's indicator is highlighted. Often used in conjunction with
-/// a [TabBarView].
-///
-/// If a [TabController] is not provided, then there must be a
-/// [DefaultTabController] ancestor.
+
 class CustomTabPageSelector extends StatelessWidget {
   /// Creates a compact widget that indicates which tab has been selected.
   const CustomTabPageSelector(
       {super.key,
-      this.controller,
       this.indicatorSize = 12.0,
-      this.color,
-      this.selectedColor,
+      this.color = Colors.transparent,
+      required this.length,
+      required this.selectedIndex,
+      this.spaceBetweenIndicators = 24,
+      this.selectedColor = Colors.black,
       this.borderStyle,
       this.borderWidth})
-      : assert(indicatorSize != null && indicatorSize > 0.0);
-
-  /// This widget's selection.
-  ///
-  /// If [TabController] is not provided, then the value of
-  /// [DefaultTabController.of] will be used.
-  final TabController? controller;
+      : assert(indicatorSize != null && indicatorSize > 0.0),
+        assert(selectedIndex != null);
 
   /// The indicator circle's diameter (the default value is 12.0).
   final double indicatorSize;
+
+  /// Number of dots in selector.
+  /// Should be equal to number of pages
+  final int length;
+
+  final int selectedIndex;
+
+  final int spaceBetweenIndicators;
 
   /// The indicator circle's fill color for unselected pages.
   ///
@@ -51,49 +49,34 @@ class CustomTabPageSelector extends StatelessWidget {
 
   Widget _buildTabIndicator(
     int tabIndex,
-    TabController tabController,
+    int selectedIndex,
     Color selectedColor,
     Color backgroundColor,
     Color borderColor,
+    int space,
   ) {
     return CustomTabPageSelectorIndicator(
       backgroundColor:
-          (tabController.index == tabIndex) ? selectedColor : backgroundColor,
+          (selectedIndex == tabIndex) ? selectedColor : backgroundColor,
       borderColor: borderColor,
       size: indicatorSize,
       borderStyle: borderStyle ?? BorderStyle.solid,
-      borderWidth: borderWidth,
+      borderWidth: borderWidth ?? 1.0,
+      margins: space / 2,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final Color fixColor = color ?? Colors.transparent;
-    final Color fixSelectedColor =
-        selectedColor ?? Theme.of(context).colorScheme.secondary;
-    final TabController? tabController =
-        controller ?? DefaultTabController.maybeOf(context);
-    assert(() {
-      if (tabController == null) {
-        throw FlutterError(
-          'No TabController for $runtimeType.\n'
-          'When creating a $runtimeType, you must either provide an explicit TabController '
-          'using the "controller" property, or you must ensure that there is a '
-          'DefaultTabController above the $runtimeType.\n'
-          'In this case, there was neither an explicit controller nor a default controller.',
-        );
-      }
-      return true;
-    }());
-    return Semantics(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: List<Widget>.generate(tabController!.length, (int tabIndex) {
-          return _buildTabIndicator(tabIndex, tabController, fixSelectedColor,
-              fixColor, fixSelectedColor);
-        }).toList(),
-      ),
+    final Color fixSelectedColor = selectedColor ?? Colors.black;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: List<Widget>.generate(length, (int tabIndex) {
+        return _buildTabIndicator(tabIndex, selectedIndex, fixSelectedColor,
+            fixColor, fixSelectedColor, spaceBetweenIndicators);
+      }).toList(),
     );
   }
 }
@@ -101,7 +84,7 @@ class CustomTabPageSelector extends StatelessWidget {
 /// Displays a single circle with the specified size, border style, border color
 /// and background colors.
 ///
-/// Used by [TabPageSelector] to indicate the selected page.
+/// Used by [CustomTabPageSelector] to indicate the selected page.
 class CustomTabPageSelectorIndicator extends StatelessWidget {
   /// Creates an indicator used by [TabPageSelector].
   ///
@@ -111,6 +94,7 @@ class CustomTabPageSelectorIndicator extends StatelessWidget {
       required this.backgroundColor,
       required this.borderColor,
       required this.size,
+      this.margins,
       this.borderStyle = BorderStyle.solid,
       this.borderWidth = 1.0})
       : assert(backgroundColor != null),
@@ -133,12 +117,14 @@ class CustomTabPageSelectorIndicator extends StatelessWidget {
 
   final double? borderWidth;
 
+  final double? margins;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: size,
       height: size,
-      margin: const EdgeInsets.all(4.0),
+      margin: EdgeInsets.all(margins ?? 4.0),
       decoration: BoxDecoration(
         color: backgroundColor,
         border: Border.all(
