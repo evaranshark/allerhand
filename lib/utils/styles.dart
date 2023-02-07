@@ -65,4 +65,8 @@ class CustomStyles {
         color: Color(0xCCF2F2F2),
         darkColor: Color(0xBF1E1E1E),
       );
+
+  //Heroes section
+  static get heroesSectionTitleTextStyle =>
+      GoogleFonts.playfairDisplay(fontWeight: FontWeight.w700, fontSize: 48);
 }

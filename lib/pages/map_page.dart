@@ -71,7 +71,9 @@ class MapPageAppBar extends StatelessWidget {
     );
   }
 
-  void _onGroupPressed() {}
+  void _onGroupPressed() {
+    locator.get<MyRouterDelegate>().pushPage(name: '/heroes');
+  }
 }
 
 class MapPageContent extends StatelessWidget {

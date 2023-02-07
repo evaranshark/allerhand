@@ -11,13 +11,19 @@ import '../utils/styles.dart';
 class CustomAppBar extends StatelessWidget {
   final Widget? leading, trailing;
   final String? title, subtitle;
+  final double? height;
   const CustomAppBar(
-      {super.key, this.leading, this.trailing, this.title, this.subtitle});
+      {super.key,
+      this.leading,
+      this.trailing,
+      this.title,
+      this.subtitle,
+      this.height});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 170,
+      height: height ?? 170,
       child: Row(
         children: [
           leading ?? _defaultLeading(),

@@ -3,6 +3,7 @@ import 'package:allerhand_test/pages/map_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/heroes_page.dart';
 import '../pages/test_page.dart';
 
 class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
@@ -40,6 +41,9 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
         break;
       case '/map':
         child = MapPage();
+        break;
+      case '/heroes':
+        child = HeroesPage();
         break;
       default:
         child = const HomePage();
