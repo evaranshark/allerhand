@@ -226,12 +226,13 @@ class MapPageContent extends StatelessWidget {
       child: CustomDialog(
         width: 1000,
         height: 700,
+        padding: EdgeInsets.symmetric(horizontal: 90, vertical: 70),
         content: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             _modalTitle(icon),
-            _modalPeople(),
+            Expanded(child: _modalPeople()),
           ],
         ),
       ),
@@ -248,8 +249,8 @@ class MapPageContent extends StatelessWidget {
                   color: const Color.fromARGB(255, 46, 64, 131), width: 2.0),
             ),
             child: SizedBox(
-              width: 40,
-              height: 40,
+              width: 65,
+              height: 65,
               child: Center(child: icon),
             ),
           ),
@@ -311,11 +312,14 @@ class MapPageContent extends StatelessWidget {
                     person.position,
                     style: CustomStyles.personPositionTextStyle,
                   ),
-                  CupertinoButton.filled(
-                    onPressed: () {},
-                    child: Text(
-                      buttonName,
-                      style: CustomStyles.personButtonTextStyle,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: CupertinoButton.filled(
+                      onPressed: () {},
+                      child: Text(
+                        buttonName,
+                        style: CustomStyles.personButtonTextStyle,
+                      ),
                     ),
                   ),
                 ],

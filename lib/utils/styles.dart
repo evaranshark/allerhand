@@ -39,7 +39,7 @@ class CustomStyles {
       );
   static get iconTextStyle => GoogleFonts.montserrat(
         fontWeight: FontWeight.w700,
-        fontSize: 22,
+        fontSize: 40,
         color: primaryColor,
       );
   static get mapModalTitleTextStyle => GoogleFonts.montserrat(
@@ -60,4 +60,9 @@ class CustomStyles {
         color: const Color.fromARGB(255, 123, 123, 123),
       );
   static get primaryColor => const Color.fromARGB(255, 46, 64, 131);
+
+  static get surfaceColor => const CupertinoDynamicColor.withBrightness(
+        color: Color(0xCCF2F2F2),
+        darkColor: Color(0xBF1E1E1E),
+      );
 }
