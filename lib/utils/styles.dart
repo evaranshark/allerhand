@@ -69,4 +69,9 @@ class CustomStyles {
   //Heroes section
   static get heroesSectionTitleTextStyle =>
       GoogleFonts.playfairDisplay(fontWeight: FontWeight.w700, fontSize: 48);
+
+  static get heroTileNameTextStyle => GoogleFonts.montserrat(
+        //fontSize: 20,
+        fontWeight: FontWeight.w700,
+      );
 }

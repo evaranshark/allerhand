@@ -1,4 +1,5 @@
 import 'package:allerhand_test/app_data.dart';
+import 'package:allerhand_test/bloc/heroes_page_bloc.dart';
 import 'package:allerhand_test/bloc/mappage_bloc.dart';
 import 'package:allerhand_test/bloc/people_bloc.dart';
 import 'package:allerhand_test/utils/allerhand_icons.dart';
@@ -65,14 +66,15 @@ class MapPageAppBar extends StatelessWidget {
           iconSize: 62,
           name: 'Все герои',
           namePadding: const EdgeInsets.only(top: 10),
-          onPressed: _onGroupPressed,
+          onPressed: () => _onGroupPressed(context),
         ),
       ),
     );
   }
 
-  void _onGroupPressed() {
+  void _onGroupPressed(BuildContext context) {
     locator.get<MyRouterDelegate>().pushPage(name: '/heroes');
+    context.read<HeroesPageBloc>().add(HeroesPageOpenedEvent());
   }
 }
 
@@ -168,7 +170,7 @@ class MapPageContent extends StatelessWidget {
           Flexible(
             child: GestureDetector(
               onTap: () {
-                context.read<PeopleCubit>().selectStage(index);
+                context.read<MapPeopleCubit>().selectStage(index);
                 showCupertinoModalPopup(
                     context: context,
                     builder: (context) => _modalBuilder(
@@ -260,7 +262,7 @@ class MapPageContent extends StatelessWidget {
               child: Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              context.read<PeopleCubit>().state.title!,
+              context.read<MapPeopleCubit>().state.title!,
               style: CustomStyles.mapModalTitleTextStyle,
             ),
           )),
@@ -271,7 +273,7 @@ class MapPageContent extends StatelessWidget {
 
   Widget _modalPeople() {
     return Builder(builder: (context) {
-      var people = context.read<PeopleCubit>().state.people;
+      var people = context.read<MapPeopleCubit>().state.people;
       return Expanded(
         child: Padding(
           padding: const EdgeInsets.only(top: 35.0),

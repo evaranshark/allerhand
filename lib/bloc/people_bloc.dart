@@ -4,23 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/person.dart';
 
-class PeopleState {
+class MapPeopleState {
   final String? title;
   final List<Person>? people;
 
-  PeopleState({this.title, this.people});
-  PeopleState copyWith({title, people}) => PeopleState(
+  MapPeopleState({this.title, this.people});
+  MapPeopleState copyWith({title, people}) => MapPeopleState(
         title: title ?? this.title,
         people: people ?? this.people,
       );
 }
 
-class PeopleCubit extends Cubit<PeopleState> {
-  PeopleCubit() : super(PeopleState());
+class MapPeopleCubit extends Cubit<MapPeopleState> {
+  MapPeopleCubit() : super(MapPeopleState());
   final repository = locator.get<AllerhandRepository>();
 
   void selectStage(int stage) async {
-    var data = await repository.getPeopleByStage(stage);
+    var data = await repository.fetchPeopleByStage(stage);
     emit(state.copyWith(title: data.title, people: data.people));
   }
 }

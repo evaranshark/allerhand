@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../utils/allerhand_icons.dart';
 import '../utils/locator.dart';
@@ -12,13 +10,16 @@ class CustomAppBar extends StatelessWidget {
   final Widget? leading, trailing;
   final String? title, subtitle;
   final double? height;
-  const CustomAppBar(
-      {super.key,
-      this.leading,
-      this.trailing,
-      this.title,
-      this.subtitle,
-      this.height});
+  final Function? onBackPressed;
+  const CustomAppBar({
+    super.key,
+    this.leading,
+    this.trailing,
+    this.title,
+    this.subtitle,
+    this.height,
+    this.onBackPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +60,16 @@ class CustomAppBar extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: CupertinoButton(
-          child: const Icon(
-            AllerhandIcons.arrow_left,
-            color: Colors.black,
-            size: 65,
-          ),
-          onPressed: () => locator.get<MyRouterDelegate>().popRoute()),
+        child: const Icon(
+          AllerhandIcons.arrow_left,
+          color: Colors.black,
+          size: 65,
+        ),
+        onPressed: () {
+          locator.get<MyRouterDelegate>().popRoute();
+          onBackPressed?.call();
+        },
+      ),
     );
   }
 }

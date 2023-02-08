@@ -1,5 +1,7 @@
+import 'package:allerhand_test/bloc/heroes_page_bloc.dart';
 import 'package:allerhand_test/bloc/mappage_bloc.dart';
 import 'package:allerhand_test/bloc/people_bloc.dart';
+import 'package:allerhand_test/pages/heroes_page.dart';
 import 'package:allerhand_test/utils/app_scroll_behavior.dart';
 import 'package:allerhand_test/utils/locator.dart';
 import 'package:allerhand_test/utils/my_router_delegate.dart';
@@ -23,7 +25,8 @@ class AllerhandTestApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<FloorCubit>(create: ((context) => FloorCubit())),
-        BlocProvider<PeopleCubit>(create: (context) => PeopleCubit()),
+        BlocProvider<MapPeopleCubit>(create: (context) => MapPeopleCubit()),
+        BlocProvider<HeroesPageBloc>(create: (context) => HeroesPageBloc()),
       ],
       child: CupertinoApp.router(
         title: "Allerhand",
