@@ -1,10 +1,7 @@
-import 'package:allerhand_test/pages/homepage.dart';
-import 'package:allerhand_test/pages/map_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/heroes_page.dart';
-import '../pages/test_page.dart';
+import '../pages/pages.dart';
 
 class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -44,6 +41,9 @@ class MyRouterDelegate extends RouterDelegate<List<RouteSettings>>
         break;
       case '/heroes':
         child = HeroesPage();
+        break;
+      case '/interview':
+        child = InterviewPage();
         break;
       default:
         child = const HomePage();

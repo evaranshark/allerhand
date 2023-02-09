@@ -19,11 +19,11 @@ class CustomDialog extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      constraints: BoxConstraints(
+      /*constraints: BoxConstraints(
         minWidth: size.width / 4,
         minHeight: size.height / 3,
         maxWidth: size.width / 2,
-      ),
+      ),*/
       child: CupertinoPopupSurface(
         child: Padding(
           padding: padding ??

@@ -71,7 +71,24 @@ class CustomStyles {
       GoogleFonts.playfairDisplay(fontWeight: FontWeight.w700, fontSize: 48);
 
   static get heroTileNameTextStyle => GoogleFonts.montserrat(
-        //fontSize: 20,
+        fontSize: 20,
         fontWeight: FontWeight.w700,
+      );
+
+  static get heroPopupNameTextStyle => GoogleFonts.montserrat(
+        fontSize: 26,
+        fontWeight: FontWeight.w700,
+      );
+  static get heroPopupPositionTextStyle => GoogleFonts.montserrat(
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+      );
+  static get heroPopupDescTextStyle => GoogleFonts.montserrat(
+        fontSize: 26,
+        fontWeight: FontWeight.w400,
+      );
+  static get heroPopupButtonTextStyle => GoogleFonts.montserrat(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
       );
 }
