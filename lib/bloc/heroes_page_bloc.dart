@@ -48,6 +48,7 @@ class HeroesPageBloc extends Bloc<HeroesPageEvent, HeroesPageState> {
     on<HeroesPagePersonSelectedEvent>(
       (event, emit) async {
         emit(state.copyWith(
+            selectedPersonId: event.personId,
             selectedHeroData:
                 await repository.fetchPersonData(event.personId)));
       },

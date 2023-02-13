@@ -1,4 +1,5 @@
 import 'package:allerhand_test/bloc/heroes_page_bloc.dart';
+import 'package:allerhand_test/bloc/interview_page_bloc.dart';
 import 'package:allerhand_test/utils/my_router_delegate.dart';
 import 'package:allerhand_test/utils/styles.dart';
 import 'package:allerhand_test/widgets/custom_app_bar.dart';
@@ -178,7 +179,8 @@ class Section extends StatelessWidget {
                       'Смотреть интервью',
                       style: CustomStyles.heroPopupButtonTextStyle,
                     ),
-                    onPressed: () => _onPersonButtonPressed(context))
+                    onPressed: () => _onPersonButtonPressed(
+                        context, state.selectedPersonId!))
               ],
             ),
           );
@@ -187,8 +189,9 @@ class Section extends StatelessWidget {
     );
   }
 
-  _onPersonButtonPressed(BuildContext context) {
+  _onPersonButtonPressed(BuildContext context, int personId) {
     locator.get<MyRouterDelegate>().pushPage(name: '/interview');
+    context.read<InterviewPageBloc>().add(InterviewPageOpenedEvent(personId));
   }
 }
 

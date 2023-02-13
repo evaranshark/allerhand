@@ -91,4 +91,17 @@ class CustomStyles {
         fontSize: 24,
         fontWeight: FontWeight.w500,
       );
+
+  //Interview section
+  static get interviewSubtitleTextStyle => GoogleFonts.montserrat(
+        fontSize: 34,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.italic,
+      );
+
+  static get interviewContentTextStyle => GoogleFonts.montserrat(
+        fontSize: 30,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.italic,
+      );
 }

@@ -1,5 +1,6 @@
 import 'package:allerhand_test/app_data.dart';
 import 'package:allerhand_test/models/heroes_section.dart';
+import 'package:allerhand_test/models/interview.dart';
 import 'package:allerhand_test/models/stage_data.dart';
 
 import '../bloc/people_bloc.dart';
@@ -59,6 +60,23 @@ class AllerhandRepository {
       position: 'должность',
       photoRef: 'assets/photo.png',
       description: 'Lorem ipsum',
+    );
+  }
+
+  Future<Interview> fetchInterview(int personId) async {
+    return Interview(
+      familyName: 'Фамилия',
+      name: 'Имя',
+      secondName: 'Отчество',
+      subtitle: '''Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit ametLorem ipsum''',
+      videoRef: 'assets/24216.mp4',
+      baseContent:
+          'Donec eu sagittis neque. Vestibulum porta eu nisl at varius. Sed congue fringilla lacinia. Sed ac est ac sem vulputate dapibus. Cras diam turpis, faucibus ac vehicula fermentum, volutpat ac mi.',
+      hiddenContent:
+          '''Donec eu sagittis neque. Vestibulum porta eu nisl at varius. Sed congue fringilla lacinia. Sed ac est ac sem vulputate dapibus. Cras diam turpis, faucibus ac vehicula fermentum, volutpat ac mi.
+Donec eu sagittis neque. Vestibulum porta eu nisl at varius. Sed congue fringilla lacinia. Sed ac est ac sem vulputate dapibus. Cras diam turpis, faucibus ac vehicula fermentum, volutpat ac mi.
+Donec eu sagittis neque. Vestibulum porta eu nisl at varius. Sed congue fringilla lacinia. Sed ac est ac sem vulputate dapibus. Cras diam turpis, faucibus ac vehicula fermentum, volutpat ac mi.''',
     );
   }
 }
